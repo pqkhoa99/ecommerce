@@ -15,14 +15,12 @@ class ProductList(Resource):
     @api.expect(_product, validate=True)
     @api.response(201, 'Product successfully created.')
     @api.doc('create a new product')
-    @admin_token_required
     def post(self):
         """Creates a new Product """
         data = request.json
         return add_new_product(data=data)
     
     @api.doc('list_of_all_products')
-    @admin_token_required
     @api.marshal_list_with(_product, envelope='data')
     def get(self):
         """List all products"""
@@ -44,7 +42,6 @@ class Product(Resource):
             return product
 
     @api.doc('update a product')
-    @admin_token_required
     def patch(self, name):
         """update a product given its name"""
         data = request.json
