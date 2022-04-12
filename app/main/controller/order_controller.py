@@ -19,6 +19,6 @@ class Order(Resource):
     @api.doc('change order status')
     #@admin_token_required
     def post(self):
-        """Updata order status"""
+        """Update order status"""
         data = request.json
         return change_order_status(data)
