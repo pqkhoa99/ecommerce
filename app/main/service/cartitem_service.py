@@ -70,6 +70,7 @@ def change_quantity(data: Dict[str, str], cart_item_id):
             cart_item_id = str(cart_item_id)
             cart_item_tmp = CartItem.query.filter_by(cart_item_id = cart_item_id).first()
             cart_item_dict = {
+                "cart_item_id": cart_item_tmp.cart_item_id,
                 "card_id": cart_item_tmp.cart_id,
                 "product_id": cart_item_tmp.product_id,
                 "quantity": cart_item_tmp.quantity,
@@ -90,17 +91,18 @@ def change_quantity(data: Dict[str, str], cart_item_id):
         db.session.commit()
 
         response_object = {
-            'status': 'successfully',
-            'message': 'change quantity of cart item successfully.',
-            'cart_item': {
-                "card_id": cart_item.cart_id,
-                "product_id": cart_item.product_id,
-                "quantity": cart_item.quantity,
-                "subtotal_ex_tax": cart_item.subtotal_ex_tax,
-                "tax_total": cart_item.tax_total,
-                "total": cart_item.total
+                'status': 'success',
+                'message': 'Cart already exists. Update cart and cart item successfully.',
+                'card': {
+                    "card_id": cart.cart_id,
+                    "user_id": cart.user_id,
+                    "quantity": quantity,
+                    "cart_item": list_cart_item,
+                    "subtotal_ex_tax" : subtotal_ex_tax,
+                    "tax_total" : tax_total,
+                    "total" : total
+                }
             }
-        }
 
         return response_object, 200
 

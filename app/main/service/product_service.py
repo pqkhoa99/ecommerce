@@ -40,13 +40,11 @@ def get_a_product(name):
 
 def update_a_product(data: Dict[str, str], name):
     product = Product.query.filter_by(name=name).first()   
-    print(product) 
     if not product:
         response_object = {
             'status': 'fail',
             'message': 'Product name does not exists.',
         }
-        print(response_object)
         return response_object, 409    
     else:
         if 'name' in data:
@@ -56,7 +54,6 @@ def update_a_product(data: Dict[str, str], name):
                 'status': 'fail',
                 'message': 'Product name exists.',
                 }
-                print(response_object)
                 return response_object, 404  
             else:
                 product.name = data['name']
@@ -74,7 +71,6 @@ def update_a_product(data: Dict[str, str], name):
             'status': 'successfully',
             'message': 'update product successfully.',
         }
-        print(response_object)
         return response_object, 200
 
 def save_changes(data: Product):

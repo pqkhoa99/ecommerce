@@ -23,9 +23,7 @@ def add_new_cart(data: Dict[str, str]):
         product = Product.query.filter_by(product_id=data['product_id']).first()
         cart_item = CartItem.query.filter_by(cart_id = cart.cart_id, product_id=data['product_id']).first()
         if cart_item:
-            print(cart_item)
             cart_item.quantity = cart_item.quantity + data['quantity']
-            print(str(cart_item.quantity))
             cart_item.subtotal_ex_tax = product.price * cart_item.quantity
             cart_item.tax_total = cart_item.subtotal_ex_tax * 10/100
             cart_item.total = cart_item.subtotal_ex_tax + cart_item.tax_total
@@ -62,6 +60,7 @@ def add_new_cart(data: Dict[str, str]):
                 'status': 'success',
                 'message': 'Cart already exists. Update cart and cart item successfully.',
                 'card': {
+                    "cart_item_id": cart_item_tmp.cart_item_id,
                     "card_id": cart.cart_id,
                     "user_id": cart.user_id,
                     "quantity": quantity,
@@ -137,7 +136,6 @@ def add_new_cart(data: Dict[str, str]):
         data_cartitem_response = add_new_cart_item(cart_id, data)
         data_cartitem = data_cartitem_response[0]
         cartitem = data_cartitem['data']
-        print(cartitem)
         response_object = {
                 'status': 'success',
                 'message': 'successfully add new cart.',
@@ -227,7 +225,6 @@ def checkout_cart(data):
                     'payment_status': order.payment_status
                 }
             }
-        print(response_object)
 
         for cart_item in list_cart_item:
             delete_cart_item(cart_item.cart_item_id)

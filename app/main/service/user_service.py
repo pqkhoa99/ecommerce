@@ -14,6 +14,7 @@ def save_new_user(data: Dict[str, str]):
             email=data['email'],
             username=data['username'],
             password=data['password'],
+            admin=True,
             registered_on=datetime.datetime.utcnow()
         )
         save_changes(new_user)
