@@ -23,8 +23,7 @@ class ProductDto:
     product = api.model('product', {
         'name': fields.String(required=True, description='The product name'),
         'description': fields.String(required=True, description='The product description'),
-        'price': fields.String(required=True, description='The product price'),
-        'product_id': fields.String(description='product_id Identifier'),
+        'price': fields.String(required=True, description='The product price')
     })
 
 class CartDto:
