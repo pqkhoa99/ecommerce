@@ -14,7 +14,9 @@
     - Using parameter: apply_interest_schedule_hour,minute,second to define schedule time
     - Using parameter: apply_interest_type to define apply interest type (daily or monthly)
     - The accrued interest is applied to the account balance at 2 decimal places by default
-#### Rebalance
+#### Localize and Delocalize:
+    - Using helper func localize_timestamp and delocalize_timestamp to converse from UTC to +7:00 or from +7:00 to UTC
+#### Rebalance:
     - The post_posting_code will rebalance address AVAILABLE_BALANCE and AUTH based on the instruction type
     - With posting instruction type HARD_SETTLEMENT and TRANSFER: rebalance address AVAILABLE_BALANCE
     - With posting instruction type AUTHORISATION: rebalance address AUTH
