@@ -16,12 +16,15 @@
     - The accrued interest is applied to the account balance at 2 decimal places by default
 #### Localize and Delocalize:
     - Using helper func localize_timestamp and delocalize_timestamp to converse from UTC to +7:00 or from +7:00 to UTC
-#### Rebalance:
+#### Pre-posting-code:
+    - Check denomination
+    - Check transaction amount
+#### Rebalance
     - The post_posting_code will rebalance address AVAILABLE_BALANCE and AUTH based on the instruction type
-    - With posting instruction type HARD_SETTLEMENT and TRANSFER: rebalance address AVAILABLE_BALANCE
-    - With posting instruction type AUTHORISATION: rebalance address AUTH
-    - With posting instruction type SETTLEMENT: rebalance address AVAILABLE_BALANCE and AUTH
-    - With posting instruction type RELEASE: rebalance AUTH
-    - With posting instruction type AUTHORISATION_ADJUSTMENT: rebalance AUTH
+    - With posting instruction type HARD_SETTLEMENT and TRANSFER: implement later
+    - With posting instruction type AUTHORISATION: implement later
+    - With posting instruction type SETTLEMENT: implement later
+    - With posting instruction type RELEASE: implement later
+    - With posting instruction type AUTHORISATION_ADJUSTMENT: implement later
 
 
