@@ -17,14 +17,16 @@
 #### Localize and Delocalize:
     - Using helper func localize_timestamp and delocalize_timestamp to converse from UTC to +7:00 or from +7:00 to UTC
 #### Pre-posting-code:
-    - Check denomination
-    - Check transaction amount
-#### Rebalance
-    - The post_posting_code will rebalance address AVAILABLE_BALANCE and AUTH based on the instruction type
-    - With posting instruction type HARD_SETTLEMENT and TRANSFER: implement later
-    - With posting instruction type AUTHORISATION: implement later
-    - With posting instruction type SETTLEMENT: implement later
-    - With posting instruction type RELEASE: implement later
-    - With posting instruction type AUTHORISATION_ADJUSTMENT: implement later
+    - Check denomination (equal to parameter denomination)
+    - Check transaction amount (in range of Available Balance)
+#### ASSUM that: 
+    - Posting instruction will effect to balance of these address: AVAILABLE BALANCE (Phase.COMMITTED & Phase.PENDING_OUT), Earmarked (Phase.PENDING_OUT) and Hold (Phase.PENDING_IN)
+    - The post_posting_code will rebalance address based on the instruction type
+    - With posting instruction type HARD_SETTLEMENT and TRANSFER: effect to Phase.COMMITTED so we need rebalance address 
+    AVAILABLE BALANCE 
+    - With posting instruction type AUTHORISATION: effect to Phase.PENDING_OUT and Phase.PENDING_IN so we need rebalance address AVAILABLE BALANCE & EARMARKED (Phase.PENDING_OUT) and HOLD (Phase.PENDING_IN)
+    - With posting instruction type SETTLEMENT: effect to Phase.PENDING_OUT / Phase.PENDING_IN and Phase.COMMITTED so we need rebalance address EARMARKED (Phase.PENDING_OUT) / HOLD (Phase.PENDING_IN) and AVAILABLE BALANCE (Phase.COMMITTED)
+    - With posting instruction type RELEASE: effect to Phase.PENDING_OUT / Phase.PENDING_IN so we need rebalance address AVAILABLE BALANCE & EARMARKED (Phase.PENDING_OUT) and HOLD (Phase.PENDING_IN)
+    - With posting instruction type AUTHORISATION_ADJUSTMENT: we need to provide the phase of the posting we want to AUTHORISATION_ADJUSTMENT in instruction_details (for ex: "instruction_details": {"phase": "POSTING_PHASE_PENDING_OUTGOING"}). the posting instruction will effect to Phase.PENDING_OUT / Phase.PENDING_IN so we need rebalance address AVAILABLE BALANCE & EARMARKED (Phase.PENDING_OUT) and HOLD (Phase.PENDING_IN)
 
 
